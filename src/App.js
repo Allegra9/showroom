@@ -1,23 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import Modal from 'react-modal'
+import { Modal } from './components/Modal'
 import { Item } from './components/Item'
 
 const API_ROOT = `https://6157228e8f7ea600179850e4.mockapi.io/api/vehicles`
-
-const customStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-    minWidth: '50%',
-  },
-}
-
-Modal.setAppElement('#root')
 
 const App = () => {
   const [items, setItems] = useState(null)
@@ -38,19 +24,10 @@ const App = () => {
     openModal()
   }
 
-  let subtitle
   const [modalIsOpen, setIsOpen] = React.useState(false)
 
   const openModal = () => {
     setIsOpen(true)
-  }
-
-  const afterOpenModal = () => {
-    subtitle.style.color = '#000'
-  }
-
-  const closeModal = () => {
-    setIsOpen(false)
   }
 
   const sortItemsByPrice = () => {
@@ -83,16 +60,10 @@ const App = () => {
       </Items>
       {item && (
         <Modal
-          isOpen={modalIsOpen}
-          onAfterOpen={afterOpenModal}
-          onRequestClose={closeModal}
-          style={customStyles}
-          contentLabel=""
+          modalIsOpen={modalIsOpen}
+          setIsOpen={setIsOpen}
+          title={`${item.make} ${item.model}`}
         >
-          <h2 ref={(_subtitle) => (subtitle = _subtitle)}>
-            {item.make} {item.model}
-          </h2>
-          <ModalCloseBtn onClick={closeModal}>&times;</ModalCloseBtn>
           <Item
             key={item.id}
             item={item}
@@ -120,17 +91,6 @@ const Items = styled.div`
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
-`
-
-const ModalCloseBtn = styled.button`
-  background-color: #fff;
-  border: 0;
-  font-weight: 400;
-  font-size: 40px;
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  cursor: pointer;
 `
 
 const SortButton = styled.button`
