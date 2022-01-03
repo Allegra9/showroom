@@ -24,11 +24,9 @@ const App = () => {
     openModal()
   }
 
-  const [modalIsOpen, setIsOpen] = React.useState(false)
+  const [modalIsOpen, setIsOpen] = useState(false)
 
-  const openModal = () => {
-    setIsOpen(true)
-  }
+  const openModal = () => setIsOpen(true)
 
   const sortItemsByPrice = () => {
     const itemsWithParsedPrice = items.map((item) => {
@@ -65,7 +63,6 @@ const App = () => {
           title={`${item.make} ${item.model}`}
         >
           <Item
-            key={item.id}
             item={item}
             handleSelectItem={handleSelectItem}
             showFullDetails={true}

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 export const Item = ({ item, handleSelectItem, showFullDetails }) => {
   return (
-    <ItemComp key={item.id} onClick={() => handleSelectItem(item)}>
+    <ItemComp onClick={() => handleSelectItem(item)}>
       <Image src={item.photo} alt={`${item.make} model ${item.model}`} />
       <Information>
         <Title>
