@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 import styled from 'styled-components'
 import { Modal } from './components/Modal'
 import { Item } from './components/Item'
@@ -10,16 +11,16 @@ const App = () => {
   const [item, setItem] = useState(null)
   const [sortDir, setSortDir] = useState('asc')
 
+  const fetchData = async () => {
+    const res = await axios.get(API_ROOT)
+    setItems(res.data)
+  }
+
   useEffect(() => {
-    async function fetchData() {
-      let data = await fetch(API_ROOT)
-      data = await data.json()
-      setItems(data)
-    }
     fetchData()
   }, [])
 
-  const handleSelectItem = (item) => {
+  const handleSelectItem = item => {
     setItem(item)
     openModal()
   }
@@ -29,7 +30,7 @@ const App = () => {
   const openModal = () => setIsOpen(true)
 
   const sortItemsByPrice = () => {
-    const itemsWithParsedPrice = items.map((item) => {
+    const itemsWithParsedPrice = items.map(item => {
       item.priceNum = parseInt(item.price, 10)
       return item
     })
@@ -47,7 +48,7 @@ const App = () => {
       <SortButton onClick={sortItemsByPrice}>Sort by price</SortButton>
       <Items>
         {items &&
-          items.map((item) => (
+          items.map(item => (
             <Item
               key={item.id}
               item={item}
