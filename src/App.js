@@ -1,11 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Showroom } from './components/Showroom'
+// import { Showroom } from './components/Showroom'
+import { Todos } from './components/Todos'
 
 const App = () => {
   return (
     <Container>
-      <Showroom />
+      <Todos />
+      {/* <Showroom /> */}
     </Container>
   )
 }
