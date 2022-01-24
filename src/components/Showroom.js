@@ -12,8 +12,8 @@ export const Showroom = () => {
   const [sortDir, setSortDir] = useState('asc')
 
   const fetchData = async () => {
-    const res = await axios.get(API_ROOT)
-    setItems(res.data)
+    const { data } = await axios.get(API_ROOT)
+    setItems(data)
   }
 
   useEffect(() => {
